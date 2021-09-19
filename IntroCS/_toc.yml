@@ -1,0 +1,10 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: markdown
+- file: notebooks
+- file: chapters/Ch01_Objects/01_Objects.md
+- file: chapters/Ch01_Jupytext/01_Objects_jupytext.md
