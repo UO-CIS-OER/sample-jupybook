@@ -1,16 +1,15 @@
 ---
-jupyter:
-   title: Objects
-   jupytext:
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.0
-   kernelspec:
-     display_name: Python 3
-     language: python
-     name: python3
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .myst
+    format_name: myst
+    format_version: 1.1
+    jupytext_version: 1.10.3
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
 ---
 
 # Objects
@@ -42,13 +41,13 @@ might be satisfactory.   If we wanted to represent
 moving a point (x,y) by some distance (dx, dy), we could 
 define a a function like 
 
-```python
+```{code-cell} python
 def move(p, d):
     x,y = p
     dx, dy = d
     return (x+dx, y+dy)
 
-print(move((5,3), (4,7))
+print(move((5,3), (4,7)))
 ```
 
 But if we are making a graphics program, we'll need to *move* functions for other graphical objects like rectangles and ovals, 
@@ -57,7 +56,7 @@ like `move_point`.  Also we should give the type contract for
 the function, which we can do with Python type hints.  With these 
 changes, we get something like this
 
-```python
+```{code-cell} python
 from typing import Tuple
 from numbers import Number
 
@@ -71,8 +70,9 @@ def move_point(p: Tuple[Number, Number],
 
 A simple test case increases our confidence that this works: 
 
-```python
-assert move_point((3,4),(5,6)) == (8,10)
+```{code-cell} python
+print(move_point((3,4),(5,6))) 
+# We expect (8,10)
 ```
 
 ### Can we do better? 
@@ -83,27 +83,27 @@ like is to express the concept of adding two points
 more concisely, as `(3,4) + (5,6)`.  What would happen if we 
 tried this? 
 
-```cli 
+~~~
 >>> (3,4) + (5,6)
 (3, 4, 5, 6) 
-```
+~~~
 
 That's not what we wanted!  Would it be better if we represented 
 points as lists? 
 
-```cli
+~~~
 >>> [3,4] + [5,6]
 [3, 4, 5, 6]
-```
+~~~
 
 No better.  Maybe as dicts? 
 
-```cli
+~~~
 >>> {"x": 3, "y": 4} + {"x": 5, "y": 6}
 Traceback (most recent call last):
   File "<input>", line 1, in <module>
 TypeError: unsupported operand type(s) for +: 'dict' and 'dict'
-```
+~~~
 
 That is not much of an improvement, although 
 an error message is usually better than silently 
@@ -190,6 +190,7 @@ p = Point(3,4)
 v = Point(5,6)
 m = p.move(v)
 
+print(f"m is a Point({m.x}, {m.y})")
 assert m.x == 8 and m.y == 10
 ```
 
@@ -205,6 +206,18 @@ instance variables.   For example, suppose we add a `move_to`
 method to `Point`: 
 
 ```python
+class Point:
+    """An (x,y) coordinate pair"""
+    def __init__(self, x: Number, y: Number):
+        self.x = x
+        self.y = y
+
+    def move(self, d: "Point") -> "Point":
+        """(x,y).move(dx,dy) = (x+dx, y+dy)"""
+        x = self.x + d.x
+        y = self.y + d.y
+        return Point(x,y)
+    
     def move_to(self, new_x, new_y):
         """Change the coordinates of this Point"""
         self.x = new_x
@@ -216,7 +229,7 @@ it changes an existing point.
 
 ```python
 m.move_to(19,23)
-
+print(f"m.x is {m.x} (should be 19) and m.y is {m.y) (should be 23)}")
 assert m.x == 19 and m.y == 23
 ```
 
@@ -250,6 +263,23 @@ how we want `+` to act on `Point` objects.  We do this by
 defining a *special method* `__add__`: 
 
 ```python
+class Point:
+    """An (x,y) coordinate pair"""
+    def __init__(self, x: Number, y: Number):
+        self.x = x
+        self.y = y
+
+    def move(self, d: "Point") -> "Point":
+        """(x,y).move(dx,dy) = (x+dx, y+dy)"""
+        x = self.x + d.x
+        y = self.y + d.y
+        return Point(x,y)
+    
+    def move_to(self, new_x, new_y):
+        """Change the coordinates of this Point"""
+        self.x = new_x
+        self.y = new_y
+        
     def __add__(self, other: "Point"):
         """(x,y) + (dx, dy) = (x+dx, y+dy)"""
         return Point(self.x + other.x, self.y + other.y)
@@ -268,6 +298,7 @@ p = Point(3,4)
 v = Point(5,6)
 m = p.move(v)
 
+print(f"m.x is {m.x} (should be 8) and m.y is {m.y} (should be 10")
 assert m.x == 8 and m.y == 10
 ```
 
@@ -314,6 +345,27 @@ to print as "(3, 2)". We would then write a
 `__str__` method in the `Point` class like this: 
 
 ```python
+class Point:
+    """An (x,y) coordinate pair"""
+    def __init__(self, x: Number, y: Number):
+        self.x = x
+        self.y = y
+
+    def move(self, d: "Point") -> "Point":
+        """(x,y).move(dx,dy) = (x+dx, y+dy)"""
+        x = self.x + d.x
+        y = self.y + d.y
+        return Point(x,y)
+    
+    def move_to(self, new_x, new_y):
+        """Change the coordinates of this Point"""
+        self.x = new_x
+        self.y = new_y
+        
+    def __add__(self, other: "Point"):
+        """(x,y) + (dx, dy) = (x+dx, y+dy)"""
+        return Point(self.x + other.x, self.y + other.y)
+
     def __str__(self) -> str:
         return f"({self.x}, {self.y})"
 ```  

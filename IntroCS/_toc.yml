@@ -4,7 +4,6 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
-- file: notebooks
-- file: chapters/Ch01_Objects/01_Objects.md
 - file: chapters/Ch01_Jupytext/01_Objects_jupytext.md
+- file: chapters/Ch02_Inheritance/02_1_Inheritance.md
+- file: chapters/Ch02_Inheritance/02_2_Notifiers.md
