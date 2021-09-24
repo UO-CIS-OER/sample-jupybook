@@ -10,11 +10,11 @@ logo: logo.png
 launch_buttons:
   thebe: true
   notebook_interface: "classic"  # or "jupyterlab"
-  binderhub_url: "https://mybinder.org"  # The URL for your BinderHub
-repository:
-  url                       : https://github.com/UO-CIS-OER/sample-jupybook  # Online location of your book
-  path_to_book              : IntroCS  # Optional path to your book, relative to the repository root
-  branch                    : main  # Which branch of the repository should be used when creating links (optional)
+  binderhub_url: "https://mybinder.org"
+  # binderhub_url:  http://localhost:12000  # The URL for your BinderHub
+  url                       : https://github.com/UO-CIS-OER/sample-jupybook 
+  path_to_book              : IntroCS 
+  branch                    : main  
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -32,6 +32,8 @@ bibtex_bibfiles:
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+repository:
+  url:  https://github.com/UO-CIS-OER/sample-jupybook 
 html:
   use_issues_button: true
   use_repository_button: true
