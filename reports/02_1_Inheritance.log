@@ -1,0 +1,41 @@
+Traceback (most recent call last):
+  File "/Users/michal/Dropbox/OER (text)/sample-jupybook/env/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/Users/michal/Dropbox/OER (text)/sample-jupybook/env/lib/python3.9/site-packages/nbclient/client.py", line 1117, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/michal/Dropbox/OER (text)/sample-jupybook/env/lib/python3.9/site-packages/nbclient/util.py", line 78, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/michal/Dropbox/OER (text)/sample-jupybook/env/lib/python3.9/site-packages/nbclient/util.py", line 57, in just_run
+    return loop.run_until_complete(coro)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/Users/michal/Dropbox/OER (text)/sample-jupybook/env/lib/python3.9/site-packages/nbclient/client.py", line 558, in async_execute
+    await self.async_execute_cell(
+  File "/Users/michal/Dropbox/OER (text)/sample-jupybook/env/lib/python3.9/site-packages/nbclient/client.py", line 862, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/Users/michal/Dropbox/OER (text)/sample-jupybook/env/lib/python3.9/site-packages/nbclient/client.py", line 765, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+class Square(Rect):
+    def __init__(self, anchor: Point, size: Number):
+        self.min_pt = anchor
+        self.max_pt = self.min_pt + Point(size, size)
+        self.size = size
+        
+sq = Square(Point(5,5), 9)
+print(f"Sample square upper right is {sq.max_pt.x}, {sq.max_pt.y})")
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m/var/folders/9c/mccrybqs2dxfrlz5ntt2xc8c0000gn/T/ipykernel_42070/2865251871.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0;32mclass[0m [0mSquare[0m[0;34m([0m[0mRect[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m     [0;32mdef[0m [0m__init__[0m[0;34m([0m[0mself[0m[0;34m,[0m [0manchor[0m[0;34m:[0m [0mPoint[0m[0;34m,[0m [0msize[0m[0;34m:[0m [0mNumber[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m         [0mself[0m[0;34m.[0m[0mmin_pt[0m [0;34m=[0m [0manchor[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m         [0mself[0m[0;34m.[0m[0mmax_pt[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mmin_pt[0m [0;34m+[0m [0mPoint[0m[0;34m([0m[0msize[0m[0;34m,[0m [0msize[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m         [0mself[0m[0;34m.[0m[0msize[0m [0;34m=[0m [0msize[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name 'Rect' is not defined
+NameError: name 'Rect' is not defined
+
