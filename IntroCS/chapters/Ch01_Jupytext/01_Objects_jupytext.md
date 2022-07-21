@@ -27,6 +27,11 @@ You are not limited to those built-in classes.
 You can use them as a foundation to build your 
 own. 
 
+```{note}
+This chapter was borrowed from existing CS 211 materials. 
+This note is an example of Myst markup. 
+```
+
 ## Example: Points
 
 What if we wanted to define a new kind of value?
